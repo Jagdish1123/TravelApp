@@ -1,0 +1,38 @@
+{% extends "trip/_base.html" %}
+
+{% block title %}Trips List{% endblock %}
+
+{% block content %}
+    <div class="auth-section">
+        {% if user.is_authenticated %}
+            <p>Welcome, <strong>{{ user.username }}</strong>!</p>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn btn btn-danger btn-sm">Logout</button>
+            </form>
+        {% else %}
+            <div class="login-links">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Login</a>
+                <a href="{% url 'signup' %}" class="btn btn-success btn-sm">Sign Up</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <h1>Trips List</h1>
+
+    {% if trips %}
+        <ul class="list-group">
+            {% for trip in trips %}
+                <li class="list-group-item">
+                    <a href="{% url 'trip-detail' trip.pk %}" class="text-decoration-none">
+                        <strong>{{ trip.city }}, {{ trip.country }}</strong> <br>
+                        <em>{{ trip.start_date }} - {{ trip.end_date }}</em> <br>
+                        Owner: {{ trip.owner.username }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="alert alert-warning">No trips available.</p>
+    {% endif %}
+{% endblock %}

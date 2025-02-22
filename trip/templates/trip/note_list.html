@@ -1,0 +1,28 @@
+{% extends "trip/_base.html" %}
+
+{% block title %}Notes for {{ trip.city }}, {{ trip.country }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h2 class="mb-3 text-primary">Notes for {{ trip.city }}, {{ trip.country }}</h2>
+        <p><strong>Start Date:</strong> {{ trip.start_date }}</p>
+        <p><strong>End Date:</strong> {{ trip.end_date }}</p>
+
+        <h3 class="mt-4">All Notes</h3>
+        {% if notes %}
+            <div class="list-group">
+                {% for note in notes %}
+                    {% include "trip/notes_detail.html" with note=note %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No notes available.</p>
+        {% endif %}
+
+        {% comment %} <a href="{% url 'trip-detail' trip.pk %}" class="btn btn-secondary mt-3"> {% endcomment %}
+            <i class="fas fa-arrow-left"></i> Back to Trip
+        </a>
+    </div>
+</div>
+{% endblock %}

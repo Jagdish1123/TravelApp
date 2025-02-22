@@ -1,0 +1,51 @@
+{% extends "trip/_base.html" %}
+
+{% block title %}Home - Travel Planner{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="text-primary">Welcome to Travel Planner! 🌍</h1>
+    <p class="lead text-muted">Plan and manage your trips with ease.</p>
+
+    {% if user.is_authenticated %}
+        <p class="mb-4">Hello, <strong>{{ user.username }}</strong>! Ready for your next adventure?</p>
+        <a href="{% url 'trip-list' %}" class="btn btn-lg btn-success">
+            <i class="fas fa-map-marked-alt"></i> View Your Trips
+        </a>
+    {% else %}
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="{% url 'signup' %}" class="btn btn-outline-success btn-lg">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="container mt-5">
+    <h3 class="text-center text-secondary">Explore Features</h3>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5><i class="fas fa-plane text-info"></i> Plan Your Trips</h5>
+                <p>Create, update, and manage your trips effortlessly.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5><i class="fas fa-sticky-note text-warning"></i> Organize Notes</h5>
+                <p>Save notes for dining, experiences, and general travel ideas.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5><i class="fas fa-star text-danger"></i> Rate Your Experiences</h5>
+                <p>Give ratings and reviews for your favorite spots.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

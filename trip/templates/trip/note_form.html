@@ -1,0 +1,57 @@
+{% extends "trip/_base.html" %}
+
+{% block title %}Add a New Note{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Add a New Note</h2>
+
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_trip" class="form-label"><strong>Trip:</strong></label>
+            {{ form.trip }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_name" class="form-label"><strong>Note Title:</strong></label>
+            {{ form.name }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_type" class="form-label"><strong>Type:</strong></label>
+            {{ form.type }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_description" class="form-label"><strong>Description:</strong></label>
+            {{ form.description }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_img" class="form-label"><strong>Upload Image:</strong></label>
+            {{ form.img }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_rating" class="form-label"><strong>Rating (1-5):</strong></label>
+            {{ form.rating }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Note</button>
+        <a href="{% url 'trip-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Bootstrap styling for better form control -->
+<style>
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+{% endblock %}
